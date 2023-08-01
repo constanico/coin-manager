@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class TransactionViewModel(private val dao: TransactionDao): ViewModel() {
@@ -50,7 +51,7 @@ class TransactionViewModel(private val dao: TransactionDao): ViewModel() {
                 val desc = state.value.desc
                 val amount = state.value.amount
 
-                if(type.isBlank() || method.isBlank() || date.isBlank() || desc.isBlank()) {
+                if(method.isBlank() || desc.isBlank()) {
                     return
                 }
 
@@ -68,7 +69,7 @@ class TransactionViewModel(private val dao: TransactionDao): ViewModel() {
                     isAddingTrx = false,
                     type = "",
                     method = "",
-                    date = "",
+                    date = LocalDate.now(),
                     desc = "",
                     amount = 0
                 ) }

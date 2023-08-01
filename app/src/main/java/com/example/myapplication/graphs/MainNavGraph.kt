@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import com.example.myapplication.BottomBarScreen
 import com.example.myapplication.db.TransactionEvent
 import com.example.myapplication.db.TransactionState
+import com.example.myapplication.screens.AddTransactionScreen
 import com.example.myapplication.screens.HomeScreen
 
 @Composable
@@ -18,7 +19,7 @@ fun MainNavGraph(
 ) {
     NavHost(
         navController = navController,
-        route = Graph.HOME,
+        route = Graph.MAIN,
         startDestination = BottomBarScreen.Home.route
     ) {
         composable(route = BottomBarScreen.Home.route) {
@@ -26,6 +27,9 @@ fun MainNavGraph(
         }
         composable(route = BottomBarScreen.Profile.route) {
             Text(text = "Profile")
+        }
+        composable(route = Graph.ADD) {
+            AddTransactionScreen(navController = navController, state = state, onEvent = onEvent)
         }
     }
 }
