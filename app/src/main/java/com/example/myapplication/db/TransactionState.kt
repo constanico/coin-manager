@@ -4,7 +4,8 @@ import java.time.LocalDate
 
 data class TransactionState(
     val transactions: List<Transaction> = emptyList(),
-    val type: String = "",
+    val flow: String = "",
+    var type: String = "",
     val method: String = "",
     val date: LocalDate = LocalDate.now(),
     val desc: String = "",

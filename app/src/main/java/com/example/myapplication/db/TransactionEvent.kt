@@ -4,6 +4,7 @@ import java.time.LocalDate
 
 sealed interface TransactionEvent {
     object SaveTransaction: TransactionEvent
+    data class SetFlow(val flow: String): TransactionEvent
     data class SetType(val type: String): TransactionEvent
     data class SetMethod(val method: String): TransactionEvent
     data class SetDate(val date: LocalDate): TransactionEvent

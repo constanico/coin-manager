@@ -45,6 +45,7 @@ class TransactionViewModel(private val dao: TransactionDao): ViewModel() {
                 )}
             }
             TransactionEvent.SaveTransaction -> {
+                val flow = state.value.flow
                 val type = state.value.type
                 val method = state.value.method
                 val date = state.value.date
@@ -56,6 +57,7 @@ class TransactionViewModel(private val dao: TransactionDao): ViewModel() {
                 }
 
                 val transaction = Transaction(
+                    flow = flow,
                     type = type,
                     method = method,
                     date = date,
@@ -67,6 +69,7 @@ class TransactionViewModel(private val dao: TransactionDao): ViewModel() {
                 }
                 _state.update { it.copy(
                     isAddingTrx = false,
+                    flow = "",
                     type = "",
                     method = "",
                     date = LocalDate.now(),
@@ -106,6 +109,11 @@ class TransactionViewModel(private val dao: TransactionDao): ViewModel() {
             }
             is TransactionEvent.SortTrx -> {
                 _sortType.value = event.sortType
+            }
+            is TransactionEvent.SetFlow -> {
+                _state.update {it.copy(
+                    flow = event.flow
+                ) }
             }
         }
     }
